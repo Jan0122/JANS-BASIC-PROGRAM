@@ -1,0 +1,294 @@
+#BOOKING SYSTEM
+print("                                                         -WELCOME TO MAC HOTEL BOOKING-")
+print(" ")
+
+#DATETIMENOW
+import datetime
+from datetime import timedelta
+import time
+now = datetime.datetime.now()
+
+
+
+while True:
+    print ("      Do you want to book? yes/no")
+    book = input("        >> ")
+
+    if book in ('yes','YES','Yes'):
+        print("      PLEASE FILL UP THIS FORM!")
+        print(" ")
+        cname = input("      Name: ")
+
+
+
+        while True:
+            try:
+                cnumber = int(input("      Contact Number: "))
+                print(" ")
+                x = str(cnumber)
+                if x != x[0:9] and x == x[0:10] and x[0] == '9':
+                    print(" ")
+                    break
+
+                else:
+                    print("      Invalid Number, Please Try Again!")
+                    print(" ")
+
+            except ValueError:
+                print("      Invalid Number, Please Try Again!")
+                print(" ")
+
+        print("      What date do want to book?")
+        while True:
+            cdate = now.strftime("%x")
+            print("      Note!Please Follow The Format")
+            print("      MM/DD/YYYY | OO/00/0000")
+            date = input("        >> ")
+            check_day = date[3:5]
+            check_month = date[0:2]
+            check_year = date[8:10]
+
+            try:
+                d = int(check_day)
+                m = int(check_month)
+                y = int(check_year)
+
+                if date != date[0:9] and date == date[0:10] and date[2] == '/' and date[5] == '/':
+
+                    if check_year > cdate[6:8]:
+                        print(" ")
+                        break
+
+                    elif check_year == cdate[6:8]:
+                        if check_month > cdate[0:2]:
+                            print(" ")
+                            break
+
+                        elif check_month == cdate[0:2]:
+                            if check_day > cdate[3:5]:
+                                print(" ")
+                                break
+                            else:
+                                print("      YOU CAN'T BOOK THAT DAY")
+                                print(" ")
+
+                        else:
+                            print("      YOU CAN'T BOOK THAT DAY")
+                            print(" ")
+                    else:
+                        print("      YOU CAN'T BOOK THAT DAY")
+                        print(" ")
+
+                else:
+                    print("      Invalid Date, Please Try Again!")
+                    print(" ")
+
+
+            except ValueError:
+                print("      Invalid Date, Please Try Again!")
+                print(" ")
+
+        print("      Time You Want To Check In")
+        while True:
+
+            print("      Note!Follow The Format")
+            print("      Military Time Format | 24 Hours Format")
+            print("      HH:MM | 00:00 ")
+            oras = input("        >> ")
+
+            try:
+                hour = int(oras[0:2])
+                minute = int(oras[3:5])
+
+                if oras != oras[0:4] and oras == oras[0:5] and oras[2] == ':':
+                    print(" ")
+                    break
+
+                else:
+                    print("      Invalid Time Format, Please Try Again!")
+                    print(" ")
+
+            except ValueError:
+                print("      Invalid Time Format, Please Try Again!")
+                print(" ")
+
+
+
+        while True:
+            try:
+                print("     ---AVAILABLE ROOMS---")
+                print("     -PLEASE TYPE THE ROOM")
+                print(" ")
+                print("      [1] Solo Room (Good For 1 person only)")
+                print("        >Price: PHP 400.00/DAY")
+                print(" ")
+                print("      [2] Regular Room (Good for 2 person only)")
+                print("        >Price: PHP 700.00/DAY")
+                print(" ")
+                print("      [3] Family Room (Good for 3-5 person only)")
+                print("       >Price 1200.00/DAY")
+                print(" ")
+                print("      [4] Super Family Room (Good for 6-10 person only)")
+                print("        >Price 3500.00/DAY")
+                print(" ")
+                print("      [5] Deluxe Room (Good for 2-3 person only)")
+                print("        >Price 2,500.00/DAY")
+                print(" ")
+                room = int(input("      Enter Room number: "))
+                print(" ")
+
+                if 5 >= room:
+                    if room == 1:
+                        room_price = 400.00
+                        room_type = '      Solo Room (Good For 1 Person Only'
+                        break
+
+                    elif room == 2:
+                        room_price = 700.00
+                        room_type = '      Regular Room (Good For 2 Persons Only'
+                        break
+
+                    elif room == 3:
+                        room_price = 1300.00
+                        room_type = '      Family Room (Good For 3-5 Persons Only)'
+                        break
+
+                    elif room == 4:
+                        room_price = 3500.00
+                        room_type = '     Super Family Room (Good For 6-10 Persons Onl)y'
+                        break
+
+                    else:
+                        room_price = 2500.00
+                        room_type = '      Deluxe Room (Good For 2-3 Person Only)'
+                        break
+
+                else:
+                    print("      INVALID ROOM NUMBER, PLEASE TRY AGAIN!")
+
+
+            except ValueError:
+                print("      INVALID ROOM NUMBER, PLEASE TRY AGAIN!")
+
+        while True:
+            try:
+                print("      How Many Days You Want To Stay")
+                stay =int(input("        >> "))
+                print(" ")
+                yy = int(date[6:10])
+                check_in = datetime.date(yy, m, d)
+                check_out = check_in + timedelta(days=stay)
+                j = str(check_out)
+                year = j[0:4]
+                month = j[5:7]
+                day = j[8:10]
+
+                break
+
+            except ValueError:
+                print("      Invalid Days Number, Please Try Again!")
+                print(" ")
+
+        total_cost = room_price * stay
+
+        print("     Total Bill: ",total_cost)
+        print(" ")
+        print("      Do You Want To Continue Booking? yes/no")
+        go = input("        >> ")
+        print(" ")
+        if go in ('yes', 'YES', 'Yes', 'y'):
+            print(" ")
+
+        else:
+            print("      Booked Cancelled ❌")
+            print("      THANK YOU!")
+            break
+
+        print("                                                                     -PAYMENT")
+        while True:
+            print(" ")
+            print("     Total Bill: ", total_cost)
+            print(" ")
+
+            try:
+                cash = int(input("      Cash: "))
+
+                if cash > total_cost:
+                    change = cash-total_cost
+
+                    print(" ")
+                    break
+
+                else:
+                    print("      Not Enough Cash, Try Again!")
+                    print(" ")
+
+            except ValueError:
+                print("      Invalid Cash, Please Try Again!")
+
+        import time
+        print("      LOADING.....")
+        print(" ")
+        time.sleep(3)
+        print("      SUCCESSFUL PAYMENT✔")
+        print(" ")
+        time.sleep(1)
+        print("                                                               SUCCESSFULLY BOOKED✔")
+        print(" ")
+        time.sleep(1)
+        print("      PRINTING THE RECEIPT PLEASE WAIT...")
+        print(" ")
+        print(" ")
+        print(" ")
+        time.sleep(3)
+
+        print(
+            "==========================================================================================================================================================")
+        print(" ")
+        print("                                                                ⁎⁎⁎MAC HOTEL⁎⁎⁎")
+        print("                                                            Owned and Operate by:")
+        print("                                                               GROUP 1 COMPANY")
+        print(" ")
+        print(" ")
+        print("      Booked Date: ",now.strftime("%x"),now.strftime("%X"))
+        print(" ")
+        print("      -Costumer Information- ")
+        print("      Name: ",cname)
+        print("      Contact: +63",cnumber)
+        print(" ")
+        print("      -BOOKED INFORMATION-")
+        print("      Room type: ",room_type)
+        print("        Price: ",room_price)
+        print("      Day of Stay: ",stay)
+        print("      Check In Date and Time: ",date,oras)
+        print("      Check Out Date and Time: ",month ,'/',day,'/',year,oras)
+        print(
+            "----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
+        print("                                                            -PAYMENT TRANSACTION-")
+        print(
+            "                                                                                                                                Cash: ",cash)
+        print(
+            "                                                                                                                                Bill:",total_cost)
+        print(
+            "                                                                                                                                Change: ",change)
+        print(" ")
+        print(
+            "-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------")
+        print("                                                              THANK YOU FOR BOOKING!")
+        print(" ")
+
+        print(" ")
+        print("      Do You Want To Book More? yes/no")
+        more = input("        >> ")
+
+        if more in ['yes','YES','Yes','y']:
+            print(" ")
+
+        else:
+            print("                                                                    THANK YOU!")
+            break
+
+    else:
+        print(" ")
+        print("      THANK YOU!TRY AGAIN")
+        print(" ")
